@@ -48,7 +48,7 @@ if ( !class_exists( 'AddReplyButton' ) ) {
 		}
 
 		public function add_scripts() {
-      wp_enqueue_script( 'add-reply-button', plugins_url( '/add-reply-button.js' ,__FILE__ ), array(), self::$version, 1 );
+      		wp_enqueue_script( 'add-reply-button', plugins_url( '/add-reply-button.js' ,__FILE__ ), array(), self::$version, 1 );
 		}
 
 		/**
