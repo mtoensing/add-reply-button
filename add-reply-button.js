@@ -7,4 +7,3 @@ for (let i = 0; i < replybtns.length; i++) {
     let lastcc = cc[cc.length - 1];
     lastcc.appendChild(replybtncp);
 }
-
