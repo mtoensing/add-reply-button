@@ -1,4 +1,4 @@
-=== Add reply button after thread ===
+=== Add reply button ===
 Contributors: marcdk
 Tags: comments, reply, threaded
 Requires at least: 3.0
@@ -7,7 +7,7 @@ Stable tag: 1.0
 
 == Description ==
 
-Adds an additional reply button at the end of the comment thread. 
+Adds an additional reply button at the end of each comment thread. 
 
 == Installation ==
 

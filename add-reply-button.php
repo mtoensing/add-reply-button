@@ -1,8 +1,9 @@
 <?php
 /*
-  Plugin Name: Add reply button after thread
-  Plugin URI: http://marc.tv/marctv-wordpress-plugins/
-  Description: Adds an additional reply button at the end of the comment thread. 
+  Plugin Name: Add reply button
+  Plugin URI: https://github.com/mtoensing/add-reply-button
+  GitHub Plugin URI: mtoensing/add-reply-button
+  Description: Adds an additional reply button at the end of each comment thread. 
   Version: 1.0
   Author: Marc Tönsing
   Author URI: http://marc.tv
