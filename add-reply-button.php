@@ -7,12 +7,8 @@
   Version: 1.0
   Author: Marc Tönsing
   Author URI: http://marc.tv
-  License: GPL2
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation; either version 2 of the License, or
-  (at your option) any later version.
+  License: GPLv2 or later
+  License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
 
 if ( !class_exists( 'AddReplyButton' ) ) {
