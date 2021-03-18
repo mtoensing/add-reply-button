@@ -4,7 +4,7 @@
   Plugin URI: https://github.com/mtoensing/add-reply-button
   GitHub Plugin URI: mtoensing/add-reply-button
   Description: Adds an additional reply button at the end of each comment thread. 
-  Version: 1.0
+  Version: 1.1
   Author: Marc Tönsing
   Author URI: http://marc.tv
   License: GPLv2 or later

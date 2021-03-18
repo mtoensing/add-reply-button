@@ -1,15 +1,18 @@
-=== Add reply button ===
+=== Append reply button ===
 Contributors: marcdk
 Tags: comments, reply, threaded
 Requires at least: 3.0
 Tested up to:  5.6
-Stable tag: 1.0
+Stable tag: 1.1
 License: GPL v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
-Adds an additional reply button at the end of each comment thread. 
+Adds an additional reply button at the end of each comment thread. Nested comments have to be enabled and works only for the first level.  
+
+* No jquery is used.
+* Only a few lines of pure JavaScript.
 
 == Installation ==
 
@@ -25,11 +28,11 @@ Please change your theme to twenty seventeen and check if it works there. If it 
 
 == Changelog ==
 
-= 1.0
+= 1.1 =
+
+Support for Firefox
+
+= 1.0 = 
 
 initial version
 
-
-== Screenshots ==
-
-1. The plugin in action
