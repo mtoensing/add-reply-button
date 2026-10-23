@@ -1,47 +1,74 @@
-    const replybtns = document.querySelectorAll(".comment-list > li .comment-reply");
+/**
+ * Continue a thread below its replies using the original WordPress reply link.
+ */
+( function () {
+	'use strict';
 
-    const supportsDataset = !! document.body.dataset;
+	function updateThreads() {
+		var lists = document.querySelectorAll( '.wp-block-comment-template, .comment-list, .commentlist' );
 
-    for (let i = 0; i < replybtns.length; i++) {
-        let replybtn = replybtns[i];
-        let replybtncp = replybtn.cloneNode(true,true);
-        replybtncp.addEventListener( 'touchstart', clickEvent, { passive: true } );
-        replybtncp.addEventListener( 'click',      clickEvent );
-        let cc = replybtn.parentElement.querySelectorAll('.children .comment-content');
+		lists.forEach( function ( list ) {
+			Array.from( list.children ).forEach( function ( thread ) {
+				if ( thread.tagName !== 'LI' ) {
+					return;
+				}
 
-        if( cc.length > 0 ){
-            let parentcomment = replybtn.parentElement;
-            console.info(parentcomment);
-            let lastcc = cc[cc.length - 1];
-            lastcc.appendChild(replybtncp);
-        }
-    }
+				var children = Array.from( thread.children ).find( function ( child ) {
+					return child.tagName === 'OL' || child.tagName === 'UL';
+				} );
+				var existing = Array.from( thread.children ).find( function ( child ) {
+					return child.classList.contains( 'marctv-thread-reply' );
+				} );
 
-    /* copied from wp-includes/js/comment-reply.js */
+				if ( ! children || ! children.querySelector( 'li' ) ) {
+					if ( existing ) {
+						existing.remove();
+					}
+					return;
+				}
+				if ( existing ) {
+					return;
+				}
 
-    function clickEvent( event ) {
-        var replyLink = this,
-            commId    = getDataAttribute( replyLink, 'belowelement'),
-            parentId  = getDataAttribute( replyLink, 'commentid' ),
-            respondId = getDataAttribute( replyLink, 'respondelement'),
-            postId    = getDataAttribute( replyLink, 'postid'),
-            follow;
+				var original = Array.from( thread.querySelectorAll( '.comment-reply-link, .comment-reply-login' ) ).find( function ( link ) {
+					return link.closest( 'li' ) === thread;
+				} );
+				if ( ! original ) {
+					return;
+				}
 
-        /*
-         * Third party comments systems can hook into this function via the global scope,
-         * therefore the click event needs to reference the global scope.
-         */
-        follow = window.addComment.moveForm(commId, parentId, respondId, postId);
-        if ( false === follow ) {
-            event.preventDefault();
-        }
-    }
+				var wrapper = document.createElement( 'div' );
+				var sourceWrapper = original.closest( '.wp-block-comment-reply-link, .reply, .comment-reply' );
+				wrapper.className = ( sourceWrapper ? sourceWrapper.className + ' ' : '' ) + 'marctv-thread-reply';
+				wrapper.id = 'marctv-thread-reply-' + thread.id;
 
-    function getDataAttribute( element, attribute ) {
-        if ( supportsDataset ) {
-            return element.dataset[attribute];
-        }
-        else {
-            return element.getAttribute( 'data-' + attribute );
-        }
-    }
+				var link = original.cloneNode( true );
+				link.removeAttribute( 'id' );
+				// Keep the original parent ID, but open the form at the thread's end.
+				link.setAttribute( 'data-belowelement', wrapper.id );
+				wrapper.appendChild( link );
+				thread.appendChild( wrapper );
+
+				if ( window.addComment && typeof window.addComment.init === 'function' ) {
+					window.addComment.init( wrapper );
+				}
+			} );
+		} );
+	}
+
+	function ready() {
+		updateThreads();
+		if ( window.MutationObserver ) {
+			var observer = new MutationObserver( updateThreads );
+			document.querySelectorAll( '.wp-block-comment-template, .comment-list, .commentlist' ).forEach( function ( list ) {
+				observer.observe( list, { childList: true, subtree: true } );
+			} );
+		}
+	}
+
+	if ( document.readyState === 'loading' ) {
+		document.addEventListener( 'DOMContentLoaded', ready );
+	} else {
+		ready();
+	}
+}() );
