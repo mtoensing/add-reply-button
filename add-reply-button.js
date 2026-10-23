@@ -26,9 +26,12 @@
 				}
 				var replies = children.querySelectorAll( 'li' );
 				var lastReply = replies[ replies.length - 1 ];
+				var content = Array.from( lastReply.querySelectorAll( '.wp-block-comment-content, .comment-content' ) ).find( function ( element ) {
+					return element.closest( 'li' ) === lastReply;
+				} ) || lastReply;
 				if ( existing ) {
-					if ( existing.parentNode !== lastReply ) {
-						lastReply.appendChild( existing );
+					if ( existing.parentNode !== content ) {
+						content.appendChild( existing );
 					}
 					return;
 				}
@@ -50,7 +53,7 @@
 				// Keep the original parent ID, but open the form at the thread's end.
 				link.setAttribute( 'data-belowelement', wrapper.id );
 				wrapper.appendChild( link );
-				lastReply.appendChild( wrapper );
+				content.appendChild( wrapper );
 
 				if ( window.addComment && typeof window.addComment.init === 'function' ) {
 					window.addComment.init( wrapper );

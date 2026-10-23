@@ -4,7 +4,7 @@
  * Plugin URI: https://github.com/mtoensing/add-reply-button
  * GitHub Plugin URI: mtoensing/add-reply-button
  * Description: Adds a WordPress reply link after the last reply of each comment thread.
- * Version: 1.2.1
+ * Version: 1.2.2
  * Requires at least: 6.0
  * Author: Marc Tönsing
  * Author URI: https://marc.tv
@@ -30,7 +30,7 @@ function marctv_add_reply_button_enqueue() {
 		'add-reply-button',
 		plugins_url( 'add-reply-button.js', __FILE__ ),
 		array( 'comment-reply' ),
-		'1.2.1',
+		'1.2.2',
 		true
 	);
 }

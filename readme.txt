@@ -3,7 +3,7 @@ Contributors: marcdk
 Tags: comments, reply, threaded
 Requires at least: 6.0
 Tested up to: 7.0
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,6 +21,9 @@ Uses the original WordPress reply handling, author labels, and login requirement
 2. Enable nested comments under Settings > Discussion.
 
 == Changelog ==
+
+= 1.2.2 =
+* Append the link inside the final reply comment content, after its text.
 
 = 1.2.1 =
 * Place the additional reply link inside the last reply list item.
