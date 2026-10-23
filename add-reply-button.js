@@ -16,9 +16,7 @@
 				var children = Array.from( thread.children ).find( function ( child ) {
 					return child.tagName === 'OL' || child.tagName === 'UL';
 				} );
-				var existing = Array.from( thread.children ).find( function ( child ) {
-					return child.classList.contains( 'marctv-thread-reply' );
-				} );
+				var existing = thread.querySelector( '.marctv-thread-reply' );
 
 				if ( ! children || ! children.querySelector( 'li' ) ) {
 					if ( existing ) {
@@ -26,7 +24,12 @@
 					}
 					return;
 				}
+				var replies = children.querySelectorAll( 'li' );
+				var lastReply = replies[ replies.length - 1 ];
 				if ( existing ) {
+					if ( existing.parentNode !== lastReply ) {
+						lastReply.appendChild( existing );
+					}
 					return;
 				}
 
@@ -47,7 +50,7 @@
 				// Keep the original parent ID, but open the form at the thread's end.
 				link.setAttribute( 'data-belowelement', wrapper.id );
 				wrapper.appendChild( link );
-				thread.appendChild( wrapper );
+				lastReply.appendChild( wrapper );
 
 				if ( window.addComment && typeof window.addComment.init === 'function' ) {
 					window.addComment.init( wrapper );
